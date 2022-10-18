@@ -142,3 +142,6 @@ modal.addEventListener('click', (e) =>{
     window.addEventListener('scroll', showModalByScroll);
 }); 
 
+    class Timer {
+        constructor(timer, modalTimerId)
+    }
