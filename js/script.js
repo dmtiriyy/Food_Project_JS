@@ -208,4 +208,10 @@ class MenuCard {
 }); 
 
 
-
+class DescrMenu{
+    days
+    deadLine
+    days
+    remove
+    floor
+}
