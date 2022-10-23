@@ -206,7 +206,5 @@ class MenuCard {
      ).render(); 
 
 }); 
-class Dessert{
-    
-}
+const Menu = new Promise()
 {}
