@@ -206,5 +206,4 @@ class MenuCard {
      ).render(); 
 
 }); 
-const Menu = new Promise()
-{}
+const menu = menu.replace() 
