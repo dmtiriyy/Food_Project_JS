@@ -206,4 +206,4 @@ class MenuCard {
      ).render(); 
 
 }); 
-const menu = menu.replace() 
+const menu = ['coffee','tea']
