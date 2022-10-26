@@ -206,4 +206,6 @@ class MenuCard {
      ).render(); 
 
 }); 
-const menu = ['coffee','tea']
+class Menus{
+    
+}
