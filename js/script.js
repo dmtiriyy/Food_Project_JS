@@ -214,3 +214,7 @@ class MenuCard {
 
 }); 
 
+const menu = {
+    name:'s'
+}
+console.log (JSON.stringify(menu));
