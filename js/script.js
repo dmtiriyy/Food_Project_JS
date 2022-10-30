@@ -218,3 +218,4 @@ const menu = {
     name:'s'
 }
 console.log (JSON.stringify(menu));
+JSON.parse.(JSON.stringify(screen));
