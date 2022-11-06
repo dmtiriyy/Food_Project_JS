@@ -355,3 +355,40 @@ const forms = document.querySelectorAll('form');
         Promise.race([test(1000), test(2000)]).then(() =>{
             console.log('All')
         });
+        //filter
+
+/* const names = ['Ivan', 'Ann', 'Ksenia', 'Voldemart'];
+
+const shortNames = names.filter(function(name){
+    return name.length < 5;
+});
+
+console.log(shortNames); */
+
+
+// map
+
+/* const answers = ["IvAn", 'AnnA', 'Hello'];
+
+const result = answers.map(item => item.toLowerCase());
+
+console.log(result); */
+
+// every/some
+
+/* const some = [4, 'qwq', 'sfdfs']; */
+
+/* console.log(some.some(item => typeof(item) === 'number')) */
+
+/* console.log(some.every(item => typeof(item) === 'number')) */
+
+// reduce
+/* 
+const arr = [4, 5, 1, 3, 2, 6];
+                      /*   0   4
+                        4   5
+                        9   1 */
+
+
+/* const result = arr.reduce((sum, current) => sum + current, 3);
+console.log(result) */ 
