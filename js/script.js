@@ -144,6 +144,8 @@ modal.addEventListener('click', (e) =>{
 
 //Using classes for cards
 
+
+
 class MenuCard {
     constructor(src, alt, title, descr, price, parentSelector, ...classes ) {
         this.src = src;
@@ -184,104 +186,75 @@ class MenuCard {
     }
 }
 
-     new MenuCard(
-        "img/tabs/vegy.jpg",
-        "vegy",
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        9,
-        '.menu .container'
-     ).render();
-     
-     
-     new MenuCard(
-        "img/tabs/elite.jpg",
-        "elite",
-        'Меню “Премиум”',
-        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        14,
-        '.menu .container'
-     ).render(); 
+const getResource = async (url) => {
+    const res = await fetch(url);
+    if (!res.ok){
+        new Error(`Could not fetch ${url}, status: ${res.status}`);
+    }
+    return await res.json();
+};
 
-     new MenuCard(
-        "img/tabs/post.jpg",
-        "post",
-        'Меню "Постное"',
-        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-        21,
-        '.menu .container'
-     ).render(); 
+getResource('http://localhost:3000/menu')
+.then(data =>{
+    data.forEach(({img, altimg, title, descr, price}) => {
+        new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    });
+});
 
-}); 
+    
 
-const forms = document.querySelectorAll('form');
+        //Forms
+
+        const forms = document.querySelectorAll('form');
 
         const message = {
-            loading: 'Загрузка',
+            loading: 'spinner.svg',
             success: 'Спасибо!Свяжимся',
             failure: 'Что-то не так...'
         };
 
         forms.forEach(item =>  {
-            postData(item);
+            bindPostData(item);
         });
 
-        function postData(form) {
+        const postData = async (url, data) => {
+            const res = await fetch(url, {
+                method: "POST",
+                 headers: {
+                    'Content-type': 'application/json'
+                }, 
+                body: data
+        })
+
+        return await res.json();
+    }
+
+        function bindPostData(form) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                let statusMessage = document.createElement('div');
-                statusMessage.classList.add('status');
-                statusMessage.textContent = message.loading;
+                let statusMessage = document.createElement('img');
+            statusMessage.src = message.loading;
+            statusMessage.style.cssText = `
+                display: block;
+                margin: 0 auto;
+            `;
                 form.append(statusMessage);
-
-                const request = new XMLHttpRequest();
-                request.open('POST', 'server.php');
-
-                request.setRequestHeader('Content-type', 'application/json');//!!!!
+                form.insertAdjacentElement('afterend', statusMessage);
                 const formData = new FormData(form);
-
-                const object = {};
-                formData.forEach(function(value, key){
-                    object[key] = value;
+                 const json = JSON.stringify(Object.fromEntries(formData.entries()));
+                            
+                postData('http://localhost:3000/requests', JSON.stringify(object))
+                .then(data =>{
+                    console.log(data);
+                    showThanksModal(message.success);
+                    statusMessage.remove();
+                }).catch(()=>{
+                    showThanksModal(message.failure);
+                }).finally(() =>{
+                    form.reset();
                 });
 
-                const json = JSON.stringify(object);
-                request.send(json);
-                
-
-                             
-               fetch('server.php', {
-                   method: "POST",
-                    headers: {
-                       'Content-type': 'application/json'
-                   }, 
-                   body: JSON.stringify(object)
-               }).then(data => data.text())
-               .then(data =>{
-                   console.log(data);
-                   showThanksModal(message.success);
-                   statusMessage.remove();
-               }).catch(()=>{
-                   showThanksModal(message.failure);
-               }).finally(() =>{
-                   form.reset();
-               });
-
-             
-           });
-       }
-                request.addEventListener('load', () => {
-                    if (request.status === 200){
-                        console.log(request.response);
-                        statusMessage.textContent = message.success;
-                        form.reset();
-                        setTimeout(()=>{
-                            statusMessage.remove();
-                        }, 2000);
-                    } else{
-                        statusMessage.textContent = message.failure;
-                    }
-                });
+              
             });
         }
 
@@ -301,94 +274,15 @@ const forms = document.querySelectorAll('form');
             `;
 
             document.querySelector('.modal').append(thanksModal);
+            setTimeout(() => {
+                thanksModal.remove();
+                prevModalDialog.classList.add('show');
+                prevModalDialog.classList.remove('hide');
+                closeModal();
+            }, 4000); 
         }
-
- 
-        console.log('Запрос данных...');
-
-
-        const req = new Promise(function(resolve, reject){
-            setTimeout(()=> {
-                console.log('Подготовка,,,');
-            
-                const product = {
-                    name: 'TV',
-                    price: 2000
-                };
-            
-                resolve(product);
-                }, 2000);
-        })
-        
-        req.then((product) => {
-            return new Promise((resolve, reject )=> {
-                setTimeout(()=> {
-                    product.status = 'order';
-                    resolve(product);
-                }, 2000)
-            });
-        }).then(data => {
-            data.modify = true;
-            return data;
-        }).then((data)=> {
-            console.log(data);
-        }).catch(()=> {
-            console.error("Произощла ошибка");
-        }).finally(() =>{
-            console.log('Finally')
-        });
-         
-        
-        const test = time => {
-            return new Promise(resolve => {
-                setTimeout(() => resolve(), time);
-            });
-        };
-        
-        /* test(1000).then(() => console.log('1000 ms'));
-        test(2000).then(() => console.log('2000 ms')); */
-        
-        /* Promise.all([test(1000), test(2000)]).then(() =>{
-            console.log('All')
-        }); */
-        
-        Promise.race([test(1000), test(2000)]).then(() =>{
-            console.log('All')
-        });
-        //filter
-
-/* const names = ['Ivan', 'Ann', 'Ksenia', 'Voldemart'];
-
-const shortNames = names.filter(function(name){
-    return name.length < 5;
-});
-
-console.log(shortNames); */
-
-
-// map
-
-/* const answers = ["IvAn", 'AnnA', 'Hello'];
-
-const result = answers.map(item => item.toLowerCase());
-
-console.log(result); */
-
-// every/some
-
-/* const some = [4, 'qwq', 'sfdfs']; */
-
-/* console.log(some.some(item => typeof(item) === 'number')) */
-
-/* console.log(some.every(item => typeof(item) === 'number')) */
-
-// reduce
-/* 
-const arr = [4, 5, 1, 3, 2, 6];
-                      /*   0   4
-                        4   5
-                        9   1 */
-
-
-/* const result = arr.reduce((sum, current) => sum + current, 3);
-console.log(result) */ 
+        fetch('http://localhost:3000/menu')
+            .then(data => data.json())
+            .then(res => console.log(res));
+     
+}); 
