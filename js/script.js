@@ -286,20 +286,27 @@ getResource('http://localhost:3000/menu')
             .then(res => console.log(res));
      
 }); 
-const funds = [
-    {amount: -1400},
-    {amount: 2400},
-    {amount: -1000},
-    {amount: 500},
-    {amount: 10400},
-    {amount: -11400}
-];
+function showGoodFilms(arr) {
+    const goodFilms = arr.filter(named => {
+        return named.rating >= 8;
+    });
+    return goodFilms;
+}
+    console.log(showGoodFilms(films))
+function showListOfFilms(arr) {
+    return arr.reduce((acc, curr) =>`${typeof(acc) === 'object' ? acc.name : acc}, ${curr.name}`);
+}
+    console.log(showListOfFilms(films));
+function setFilmsIds(arr) {
+    return arr.map((item,i) => {
+        item.id =i;
+        return item;
+    });
+}
+    console.log(setFilmsIds(films))
+const tranformedArray = setFilmsIds(films);
 
-const getPositiveIncomeAmount = (data) => {
-    return data.filter(item => item.amount > 0).reduce((sum, curr) => sum+ curr.amount, 0)
-};
-    console.log(getPositiveIncomeAmount(funds))
-const getTotalIncomeAmount = (data) => {
-    return data.some(item => item.amount <=0) ? data.reduce((sum, curr) => sum+ curr.amount, 0) : getPositiveIncomeAmount(data) 
-};
-console.log(getTotalIncomeAmount(funds));
+function checkFilms(arr) {
+    return arr.every(film => film.id || film.id === 0 ? true : false );
+}
+console.log(checkFilms(tranformedArray))
