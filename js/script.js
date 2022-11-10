@@ -284,29 +284,54 @@ getResource('http://localhost:3000/menu')
         fetch('http://localhost:3000/menu')
             .then(data => data.json())
             .then(res => console.log(res));
-     
-}); 
-function showGoodFilms(arr) {
-    const goodFilms = arr.filter(named => {
-        return named.rating >= 8;
-    });
-    return goodFilms;
-}
-    console.log(showGoodFilms(films))
-function showListOfFilms(arr) {
-    return arr.reduce((acc, curr) =>`${typeof(acc) === 'object' ? acc.name : acc}, ${curr.name}`);
-}
-    console.log(showListOfFilms(films));
-function setFilmsIds(arr) {
-    return arr.map((item,i) => {
-        item.id =i;
-        return item;
-    });
-}
-    console.log(setFilmsIds(films))
-const tranformedArray = setFilmsIds(films);
 
-function checkFilms(arr) {
-    return arr.every(film => film.id || film.id === 0 ? true : false );
-}
-console.log(checkFilms(tranformedArray))
+
+        //Slider
+
+    const slides = document.querySelectorAll('.offer__slide'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current'),
+        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+        slidesField = document.querySelector('.offer__slider-inner'),
+        width = window.getComputedStyle(slidesWrapper).width;
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    if(slides.length < 10) {
+        total.textContent = `0${slides.length}`
+    } else {
+        total.textContent = slides.length;
+    }
+    function showSlides(n) {
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        slides.forEach((item) => item.style.display = 'none');
+
+        slides[slideIndex - 1].style.display = 'block';
+
+        if(slides.length < 10) {
+            current.textContent = `0${slideIndex}`
+        } else {
+            current.textContent = slideIndex;
+        }
+    }
+    function plusSlides(n){
+        showSlides(slideIndex += n);
+    }
+    
+    prev.addEventListener('click', function(){
+        plusSlides(-1);
+    });
+
+    next.addEventListener('click', function(){
+        plusSlides(1);
+    }); 
+}); 
