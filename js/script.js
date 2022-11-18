@@ -543,19 +543,17 @@ getResource('http://localhost:3000/menu')
     getDynamicInformation('#height');
     getDynamicInformation('#weight');
     getDynamicInformation('#age');
-    const persone = {
-        name: 'Alex',
-        age: 25,
+    function myAnimation(){
+        pos++;
+        elem.style.top = pos + 'px';
+        elem.style.left = pos + 'px';
     
-        get userAge() {
-            return this.age;
-        },
-    
-        set userAge(num) {
-            this.age = num;
+            if(pos < 300) {
+                requestAnimationFrame(myAnimation);
         }
-    };
-    console.log(persone.userAge = 30);
-    console.log(persone.userAge);
+        
+     
+    }
+     btn.addEventListener('click', () => requestAnimationFrame(myAnimation));
      });
  
