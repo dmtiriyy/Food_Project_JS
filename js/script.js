@@ -540,20 +540,37 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-    getDynamicInformation('#height');
-    getDynamicInformation('#weight');
-    getDynamicInformation('#age');
-    function myAnimation(){
-        pos++;
-        elem.style.top = pos + 'px';
-        elem.style.left = pos + 'px';
-    
-            if(pos < 300) {
-                requestAnimationFrame(myAnimation);
-        }
-        
-     
+   
+class User {
+
+    constructor(name, age){
+        this.name = name;
+        this._age = age;
     }
-     btn.addEventListener('click', () => requestAnimationFrame(myAnimation));
+    
+    
+    say () {
+        console.log(`Имя пользователя: ${this.name}, возраст ${this._age}`);
+    }
+
+    get age() {
+        return this._age;
+    }
+
+    set age(age) {
+        if(typeof age === 'number' && age > 0 && age< 110){
+            this._age = age;
+        } else {
+            console.log('Недопустимое значение')
+        }
+    }
+}
+
+const ivan = new User('Ivan', 27);
+console.log(ivan.age);
+ivan.age = 99;
+console.log(ivan.age)
+
+ivan.say();
      });
  
