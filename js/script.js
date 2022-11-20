@@ -541,36 +541,24 @@ getResource('http://localhost:3000/menu')
             });
         }
    
-class User {
+// 1 way of module
+//main.js
 
-    constructor(name, age){
-        this.name = name;
-        this._age = age;
-    }
-    
-    
-    say () {
-        console.log(`Имя пользователя: ${this.name}, возраст ${this._age}`);
-    }
-
-    get age() {
-        return this._age;
-    }
-
-    set age(age) {
-        if(typeof age === 'number' && age > 0 && age< 110){
-            this._age = age;
-        } else {
-            console.log('Недопустимое значение')
-        }
+function myModule() {
+    this.hello = function() {
+        console.log('hello')
     }
 }
+module.exports = myModule;
 
-const ivan = new User('Ivan', 27);
-console.log(ivan.age);
-ivan.age = 99;
-console.log(ivan.age)
 
-ivan.say();
+
+//index.js
+
+const myModule = require('./main'); 
+
+const myModuleInstance = new myModule();
+
+myModuleInstance.hello();
      });
  
