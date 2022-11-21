@@ -541,24 +541,24 @@ getResource('http://localhost:3000/menu')
             });
         }
    
-// 1 way of module
-//main.js
+       // 2 way of module
 
-function myModule() {
-    this.hello = function() {
-        console.log('hello')
-    }
-}
-module.exports = myModule;
-
-
-
-//index.js
-
-const myModule = require('./main'); 
-
-const myModuleInstance = new myModule();
-
-myModuleInstance.hello();
+        //main.js
+        /* export let one = 1;
+        let two = 2;
+        
+        export {two};
+        
+        export default function sayHi() {
+            console.log('Hello');
+        } */
+        
+        //script.js
+        
+        import * as data from './main';
+        import sayHi from './main';
+         console.log(`${data.one} and ${data.two}`);
+         
+        sayHi();
      });
  
