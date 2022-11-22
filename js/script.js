@@ -541,24 +541,17 @@ getResource('http://localhost:3000/menu')
             });
         }
    
-       // 2 way of module
-
-        //main.js
-        /* export let one = 1;
-        let two = 2;
-        
-        export {two};
-        
-        export default function sayHi() {
-            console.log('Hello');
-        } */
-        
-        //script.js
-        
-        import * as data from './main';
-        import sayHi from './main';
-         console.log(`${data.one} and ${data.two}`);
-         
-        sayHi();
+        try {
+            console.log('normal')
+            console.log(a);
+            console.log('result');
+        } catch(error) {
+            console.log(error.name);
+            console.log(error.message);
+            console.log(error.stack);
+        } finally{
+            console.log('watch')
+        }
+        console.log('Stiil normal');
      });
  
