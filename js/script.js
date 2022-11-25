@@ -541,17 +541,37 @@ getResource('http://localhost:3000/menu')
             });
         }
    
-        try {
-            console.log('normal')
-            console.log(a);
-            console.log('result');
-        } catch(error) {
-            console.log(error.name);
-            console.log(error.message);
-            console.log(error.stack);
-        } finally{
-            console.log('watch')
+        const data = [
+            {
+                id: 'box',
+                tag: 'div'
+            },
+            {
+                id: '',
+                tag: 'nav'
+            },
+            {
+                id: 'circle',
+                tag: ''
+            }
+        ]
+        
+        try{
+            data.forEach((blockObj,i) => {
+                const block = document.createElement(blockObj.tag);
+            
+                if(!blockObj.id) throw new Error(`В данных под номером ${i + 1} нет id`);
+            
+                block.setAttribute('id', blockObj.id);
+                document.body.append(block);
+            })
+        } catch(e){
+            if(e.name === "SyntaxError"){
+        
+            
+            console.log(e.message);
+            } else throw e;
         }
-        console.log('Stiil normal');
+        
      });
  
