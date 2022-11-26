@@ -540,38 +540,15 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-   
-        const data = [
-            {
-                id: 'box',
-                tag: 'div'
-            },
-            {
-                id: '',
-                tag: 'nav'
-            },
-            {
-                id: 'circle',
-                tag: ''
-            }
-        ]
+        const width1 = box.scrollWidth;
+        const height2 = box.scrollHeight;
         
-        try{
-            data.forEach((blockObj,i) => {
-                const block = document.createElement(blockObj.tag);
-            
-                if(!blockObj.id) throw new Error(`В данных под номером ${i + 1} нет id`);
-            
-                block.setAttribute('id', blockObj.id);
-                document.body.append(block);
-            })
-        } catch(e){
-            if(e.name === "SyntaxError"){
+        console.log(width1, height2);
         
-            
-            console.log(e.message);
-            } else throw e;
-        }
+        btn.addEventListener('click', ()=>{
+            /* box.style.height = box.scrollHeight + 'px'; */
+            console.log(box.scrollTop);
+        });
         
      });
  
