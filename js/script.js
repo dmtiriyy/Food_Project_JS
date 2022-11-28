@@ -540,15 +540,15 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-        const width1 = box.scrollWidth;
-        const height2 = box.scrollHeight;
-        
-        console.log(width1, height2);
-        
-        btn.addEventListener('click', ()=>{
-            /* box.style.height = box.scrollHeight + 'px'; */
-            console.log(box.scrollTop);
-        });
+        let start = new Date();
+
+for(let i=0; i<10000; i++){
+    let some = i** 3;
+}
+
+let end = new Date();
+
+alert(`Цикл отработал за ${end - start} милисекунд`)
         
      });
  
