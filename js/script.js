@@ -540,15 +540,28 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-        let start = new Date();
-
-for(let i=0; i<10000; i++){
-    let some = i** 3;
-}
-
-let end = new Date();
-
-alert(`Цикл отработал за ${end - start} милисекунд`)
+        class Rectangle {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
         
+            calcArea() {
+                return this.height * this.width;
+            }
+        }
+        
+        
+        class ColoredRectangleWithText extends Rectangle {
+            constructor(height, width, text, bgColor){
+                super(height,width);//вызывает тоже самое что у родителя
+                this.text = text;
+                this.bgColor = bgColor;
+            }
+        
+            showMyProps() {
+                console.log(`Текст: ${this.text}, цвет: ${this.bgColor}`);
+            }
+        }
      });
  
