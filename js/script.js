@@ -540,28 +540,14 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-        class Rectangle {
-            constructor(height, width) {
-                this.height = height;
-                this.width = width;
-            }
-        
-            calcArea() {
-                return this.height * this.width;
-            }
+        const log = function(a, b, ...rest) {
+            console.log(a, b, rest);
         }
+        log('basic', 'rest', 'oper', 'usage')
         
-        
-        class ColoredRectangleWithText extends Rectangle {
-            constructor(height, width, text, bgColor){
-                super(height,width);//вызывает тоже самое что у родителя
-                this.text = text;
-                this.bgColor = bgColor;
-            }
-        
-            showMyProps() {
-                console.log(`Текст: ${this.text}, цвет: ${this.bgColor}`);
-            }
+        function calcOrDouble(number, basis = 2) {
+            console.log(number* basis);
         }
+        calcOrDouble(3);
      });
  
