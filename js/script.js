@@ -540,14 +540,17 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-        const log = function(a, b, ...rest) {
-            console.log(a, b, rest);
+        function User(name, id) {
+            this.name = name;
+            this.id = id;
+            this.human = true;
+            this.hello = function() {
+                console.log(`Hello ${this.name}`);
+            };
         }
-        log('basic', 'rest', 'oper', 'usage')
         
-        function calcOrDouble(number, basis = 2) {
-            console.log(number* basis);
-        }
-        calcOrDouble(3);
+        User.prototype.exit = function() {
+            console.log(`Пользователь ${this.name} ушел`)
+        };
      });
  
