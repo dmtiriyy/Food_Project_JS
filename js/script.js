@@ -540,26 +540,17 @@ getResource('http://localhost:3000/menu')
                 calcTotal();
             });
         }
-        function User(name, id) {
-            this.name = name;
-            this.id = id;
-            this.human = true;
-            this.hello = function() {
-                console.log(`Hello ${this.name}`);
-            };
+        function logger(){
+            if(i=== 3){
+                clearInterval(timerId)  
+            }
+            console.log('text');
+            i++; 
         }
         
-        User.prototype.exit = function() {
-            console.log(`Пользователь ${this.name} ушел`)
-        };
-        const ivan = new User('Ivan', 28);
-        const alex = new User('Alex', 22);
-        ivan.exit();
-
-        ivan.hello();
-        alex.hello();
-
-        console.log(ivan);
-        console.log(alex);
+        let id = setTimeout(function log(){
+            console.log('Hello');
+            id = setTimeout(log, 500);
+        }); 
      });
  
