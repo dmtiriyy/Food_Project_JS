@@ -571,5 +571,12 @@ getResource('http://localhost:3000/menu')
     getDynamicInformation('#height');
     getDynamicInformation('#weight');
     getDynamicInformation('#age');
+    // () => {}
+    // microtasks: then/catch/finally/await
+    // render
+    // () => {}
+    // microtasks: then/catch/finally/await
+    // render
+    // () => {}
     });
 
