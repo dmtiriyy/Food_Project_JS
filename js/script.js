@@ -571,6 +571,17 @@ getResource('http://localhost:3000/menu')
     getDynamicInformation('#height');
     getDynamicInformation('#weight');
     getDynamicInformation('#age');
+    console.log(1);
+
+setTimeout(() => {
+    console.log('timeout')
+}, 4000);
+
+setTimeout(() => {
+    console.log('timeout_4')
+}, 4000);
+
+console.log(2);
     // () => {}
     // microtasks: then/catch/finally/await
     // render
